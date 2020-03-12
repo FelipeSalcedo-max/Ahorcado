@@ -137,7 +137,12 @@ public class Ordenamiento extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int Arreglo[]= new int [Tabla1.getSelectedColumn()];
+        int Arreglo[]= new int [100];
+        
+        if (Tabla1.getSelectedRow()!= -1){
+            
+            Tabla1.setValueAt(Tabla1.getSelectedRow(), 1, 1);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void NumeroColumnasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NumeroColumnasActionPerformed
