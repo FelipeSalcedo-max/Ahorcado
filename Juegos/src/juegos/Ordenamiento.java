@@ -5,6 +5,8 @@
  */
 package juegos;
 
+import java.util.Scanner;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -70,6 +72,11 @@ public class Ordenamiento extends javax.swing.JFrame {
         jScrollPane1.setViewportView(Tabla1);
 
         jButton2.setText("Buscar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -137,14 +144,29 @@ public class Ordenamiento extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int Arreglo[]= new int [100];
+        /*String n= NumeroColumnas.getText();
+        int a =Integer.parseInt(n);
+        int columnas = a;*/
         
-        if (Tabla1.getSelectedRow()!= -1){
+        
             
-            Tabla1.setValueAt(Tabla1.getSelectedRow(), 1, 1);
-        }
+           /* Tabla1.setValueAt(a, 1, columnas);
+            int nElementos=Integer.parseInt(JOptionPane.showInputDialog("Cuantos datos quiere ordenar?"));
+            int vector[]=new int[nElementos];
+            int aux;
+        
+        for (int  i = 0;  i < (nElementos-1);  i++) {
+            for (int  j = 0;  j <(nElementos-1);  j++) {
+                if(vector[j]>vector[j+1]){
+                 aux=vector[j];
+                 vector[j]=vector[j+1];
+                 vector[j+1]=aux;
+                }
+            }*/
+           Ordenar();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
     private void NumeroColumnasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NumeroColumnasActionPerformed
         // TODO add your handling code here:
         String numero= NumeroColumnas.getText();
@@ -153,6 +175,19 @@ public class Ordenamiento extends javax.swing.JFrame {
         int filas = 2;
         Tabla1.setModel(new DefaultTableModel(filas,columnas));
     }//GEN-LAST:event_NumeroColumnasActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        DefaultTableModel modelo= (DefaultTableModel) Tabla1.getModel();
+         String ele = Tabla1.getColumnName(NumeroColumnas.getText());
+ 
+    for (int i = 0; i < tbComponentes.getRowCount(); i++) {
+           if (Tabla1.getValueAt(i, 1).equals(ele)) {                                           
+                  tbComponentes.changeSelection(i, 1, false, false);
+                  break;
+           }
+    }
+       
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,6 +223,38 @@ public class Ordenamiento extends javax.swing.JFrame {
             }
         });
     }
+    public void Ordenar(){
+        //Scanner objetoIn= new Scanner(System.in);
+    //int nElementos=Integer.parseInt(JOptionPane.showInputDialog("Cuantos datos quiere ordenar?"));
+    int nElementos= Integer.parseInt( NumeroColumnas.getText());
+    
+    int vector[]=new int[nElementos];
+    int aux;
+    //for(int i=0;a<iElementos;i++)    
+    //System.out.println("Ingrese el dato "+(i+1));
+    //vector[i]=objetoIn.nextInt();
+    if (Tabla1.getSelectedRow()!= -1){
+    
+    // algoritmo burbuja:
+        for (int  i = 0;  i < (nElementos-1);  i++) {
+            for (int  j = 0;  j <(nElementos-1);  j++) {
+                if(vector[j]>vector[j+1]){
+                 aux=vector[j];
+                 vector[j]=vector[j+1];
+                 vector[j+1]=aux;
+                }
+            }
+            Tabla1.getValueAt(vector[i], 1);
+        }
+        for (int  i = 0;  i <nElementos;  i++) {
+            
+        } 
+    }
+    
+    }
+    
+        
+       
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField NumeroColumnas;
