@@ -7,14 +7,19 @@ package juegos;
 
 import java.util.Scanner;
 import javax.swing.JOptionPane;
+import juegos.Resistencias;
+import menu.NewJFrame;
+import ahorcado3.ahorcadoo;
 import javax.swing.table.DefaultTableModel;
+import menu.NewJFrame;
 
 /**
  *
  * @author RetailAdmin
  */
 public class Ordenamiento extends javax.swing.JFrame {
-
+static String contador;
+DefaultTableModel modelo=new DefaultTableModel();
     /**
      * Creates new form Ordenamiento
      */
@@ -36,10 +41,10 @@ public class Ordenamiento extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla1 = new javax.swing.JTable();
-        jTextField2 = new javax.swing.JTextField();
+        Buscarnum = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jButton3 = new javax.swing.JButton();
+        menu = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,6 +76,12 @@ public class Ordenamiento extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(Tabla1);
 
+        Buscarnum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarnumActionPerformed(evt);
+            }
+        });
+
         jButton2.setText("Buscar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,18 +89,19 @@ public class Ordenamiento extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
+        jButton3.setText("Salir");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
-        ));
-        jScrollPane2.setViewportView(jTable2);
+        });
+
+        menu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ordenamiento", "Menu", "Ahorcado", "Resistencias" }));
+        menu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,96 +110,184 @@ public class Ordenamiento extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(NumeroColumnas, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(105, 105, 105)
-                                .addComponent(jButton1))
-                            .addComponent(jLabel1)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Buscarnum, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(109, 109, 109)
+                        .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2)
-                                .addGap(135, 135, 135)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(165, 165, 165)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(27, 27, 27)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(NumeroColumnas, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(105, 105, 105)
+                                    .addComponent(jButton1))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(25, 25, 25)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NumeroColumnas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Buscarnum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(35, 35, 35))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        /*String n= NumeroColumnas.getText();
-        int a =Integer.parseInt(n);
-        int columnas = a;*/
-        
-        
-            
-           /* Tabla1.setValueAt(a, 1, columnas);
-            int nElementos=Integer.parseInt(JOptionPane.showInputDialog("Cuantos datos quiere ordenar?"));
-            int vector[]=new int[nElementos];
-            int aux;
-        
-        for (int  i = 0;  i < (nElementos-1);  i++) {
-            for (int  j = 0;  j <(nElementos-1);  j++) {
-                if(vector[j]>vector[j+1]){
-                 aux=vector[j];
-                 vector[j]=vector[j+1];
-                 vector[j+1]=aux;
+       contador= NumeroColumnas.getText();
+        int cont= Integer.parseInt(contador);
+        int v[]=new int[cont];
+        int aux;
+        for (int i = 0; i < cont; i++) {
+            v[i]=Integer.parseInt(modelo.getValueAt(0, i).toString());//leer datos en fila 1
+        }
+        for (int i = 0; i < v.length-1; i++) {//for para leer numeros en vector
+            for (int j=0; j < v.length-1 ; j++) {//for para leer el numero despues de i
+                if (v[j]>v[j+1]) {//comprueba si el numero es menor al siguiente
+                    aux=v[j];
+                    v[j]=v[j+1];
+                    v[j+1]=aux;
+                    //v[j]=v[j+1];
+                    //v[j+1]=aux[i];
+                    //v[j]=aux[];
+                    
                 }
-            }*/
-           Ordenar();
-        
+            }
+           
+        }
+        for (int j = 0; j < cont; j++) {
+            modelo.setValueAt(v[j],1,j); 
+        }
+                for (int i = 0; i < v.length-1; i++) {//for para leer numeros en vector
+            for (int j=0; j < v.length-1 ; j++) {//for para leer el numero despues de i
+                if (v[j]<v[j+1]) {//comprueba si el numero es menor al siguiente
+                    aux=v[j];
+                    v[j]=v[j+1];
+                    v[j+1]=aux;
+                    //v[j]=v[j+1];
+                    //v[j+1]=aux[i];
+                    //v[j]=aux[];
+                    
+                }
+            }
+           
+        }
+        for (int j = 0; j < cont; j++) {
+            modelo.setValueAt(v[j],2,j); 
+        }
+
+//        for (int i = 0; i < cont; i++) {
+//            menor=v[0];
+//            if (v[i]<menor) {
+//                menor = v[i];
+//            } else {
+//                if (v[i]>menor) {
+//                    menor=menor;
+//                }
+//            } mod.setValueAt(Arrays.toString(v),1,i); 
+//        }
+         
+        //System.out.println(Arrays.toString(v));
+        // TODO add your handling code here:
+    
+   
     }//GEN-LAST:event_jButton1ActionPerformed
     
     private void NumeroColumnasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NumeroColumnasActionPerformed
         // TODO add your handling code here:
-        String numero= NumeroColumnas.getText();
+       /* String numero= NumeroColumnas.getText();
         int tam=Integer.parseInt(numero);
         int columnas = tam;
-        int filas = 2;
-        Tabla1.setModel(new DefaultTableModel(filas,columnas));
+        int filas = 3;
+        Tabla1.setModel(new DefaultTableModel(filas,columnas));*/
+       contador= NumeroColumnas.getText();
+        int cont= Integer.parseInt(contador);
+        for (int i = 0; i < cont; i++) {
+            modelo.addColumn("Num "+i);//lo coloca dentro de la tabla en columnas
+            Tabla1.setModel(modelo);
+            modelo.setNumRows(3);
+        }
     }//GEN-LAST:event_NumeroColumnasActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        DefaultTableModel modelo= (DefaultTableModel) Tabla1.getModel();
-         String ele = Tabla1.getColumnName(NumeroColumnas.getText());
+        //DefaultTableModel modelo= (DefaultTableModel) Tabla1.getModel();
+         String ele = NumeroColumnas.getText();
  
-    for (int i = 0; i < tbComponentes.getRowCount(); i++) {
+    for (int i = 0; i < Tabla1.getRowCount(); i++) {
            if (Tabla1.getValueAt(i, 1).equals(ele)) {                                           
-                  tbComponentes.changeSelection(i, 1, false, false);
+                  Tabla1.changeSelection(i, 1, false, false);
                   break;
            }
     }
        
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void BuscarnumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarnumActionPerformed
+        // TODO add your handling code here:
+        String ele = Buscarnum.getText();
+
+        for (int i = 0; i < Tabla1.getRowCount(); i++) {
+            if (Tabla1.getValueAt(i, 1).equals(ele)) {
+                Tabla1.changeSelection(i, 1, false, false);
+                break;
+            }
+        }
+    }//GEN-LAST:event_BuscarnumActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuActionPerformed
+        // TODO add your handling code here:
+        int a=menu.getSelectedIndex();
+      System.out.println(a);
+     
+      switch(a){
+          
+          case 1:
+              NewJFrame a1= new NewJFrame();
+              a1.setVisible(true);
+              break;  
+          case 2:
+              ahorcadoo o1=new ahorcadoo();
+              o1.setVisible(true);
+              break;
+          case 3:
+              Resistencias r1= new Resistencias();
+              r1.setVisible(true);
+              break;  
+              
+              
+      }
+    }//GEN-LAST:event_menuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,48 +323,20 @@ public class Ordenamiento extends javax.swing.JFrame {
             }
         });
     }
-    public void Ordenar(){
-        //Scanner objetoIn= new Scanner(System.in);
-    //int nElementos=Integer.parseInt(JOptionPane.showInputDialog("Cuantos datos quiere ordenar?"));
-    int nElementos= Integer.parseInt( NumeroColumnas.getText());
     
-    int vector[]=new int[nElementos];
-    int aux;
-    //for(int i=0;a<iElementos;i++)    
-    //System.out.println("Ingrese el dato "+(i+1));
-    //vector[i]=objetoIn.nextInt();
-    if (Tabla1.getSelectedRow()!= -1){
-    
-    // algoritmo burbuja:
-        for (int  i = 0;  i < (nElementos-1);  i++) {
-            for (int  j = 0;  j <(nElementos-1);  j++) {
-                if(vector[j]>vector[j+1]){
-                 aux=vector[j];
-                 vector[j]=vector[j+1];
-                 vector[j+1]=aux;
-                }
-            }
-            Tabla1.getValueAt(vector[i], 1);
-        }
-        for (int  i = 0;  i <nElementos;  i++) {
-            
-        } 
-    }
-    
-    }
     
         
        
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Buscarnum;
     private javax.swing.JTextField NumeroColumnas;
     private javax.swing.JTable Tabla1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JComboBox<String> menu;
     // End of variables declaration//GEN-END:variables
 }

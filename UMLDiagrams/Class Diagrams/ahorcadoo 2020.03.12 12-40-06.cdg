@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="ahorcadoo">
+  <ClassDiagramComponents>
+    <Class name="ahorcadoo" package="ahorcado3" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="letra2" type="DefaultListModel" visibility="package"/>
+        <Field name="letra3" type="DefaultListModel" visibility="package"/>
+        <Field name="ingresar" type="javax.swing.JButton" visibility="public" isStatic="true"/>
+        <Field name="jList1" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
+        <Field name="jScrollBar1" type="javax.swing.JScrollBar" visibility="private"/>
+        <Field name="jScrollPane1" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane2" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane3" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane4" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="lista" type="javax.swing.JList&lt;String&gt;" visibility="public" isStatic="true"/>
+        <Field name="lista2" type="javax.swing.JList&lt;String&gt;" visibility="public" isStatic="true"/>
+        <Field name="menu" type="javax.swing.JComboBox&lt;String&gt;" visibility="private"/>
+        <Field name="probar" type="javax.swing.JButton" visibility="public" isStatic="true"/>
+        <Field name="repetir" type="javax.swing.JButton" visibility="public" isStatic="true"/>
+        <Field name="salir" type="javax.swing.JButton" visibility="private"/>
+        <Field name="tabla" type="javax.swing.JTable" visibility="public" isStatic="true"/>
+        <Field name="txt1" type="javax.swing.JPasswordField" visibility="public" isStatic="true"/>
+        <Field name="txt2" type="javax.swing.JTextField" visibility="public" isStatic="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+void" visibility="private"/>
+        <Method name="ingresarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="probarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="salirActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="txt1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="txt2KeyTyped" returnType="void" visibility="private">
+          <Argument type="java.awt.event.KeyEvent" name="evt"/>
+        </Method>
+        <Method name="repetirActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="menuActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations/>
+</ClassDiagram>
